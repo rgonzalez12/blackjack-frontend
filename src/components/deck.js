@@ -2,22 +2,22 @@ class Deck {
 
 
 
-    static createDeck() {
+    static buildDeck() {
 
-        let suits = ["Clubs", "Hearts", "Spades", "Diamonds"];
-        let values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
-        var deck = []
+        const suits = ["Clubs", "Hearts", "Spades", "Diamonds"];
+        const ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
+        let deck = []
 
-        for (var i = 0 ; i < values.length; i++) {
+        for (let i = 0 ; i < ranks.length; i++) {
 
-            for(var x = 0; x < suits.length; x++) {
+            for(let x = 0; x < suits.length; x++) {
 
-                var weight = parseInt(values[i]);
-                if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
+                const weight = parseInt(ranks[i]);
+                if (ranks[i] == "J" || ranks[i] == "Q" || ranks[i] == "K")
                     weight = 10;
-                if (values[i] == "A")
+                if (ranks[i] == "A")
                     weight = 11;
-                var card = { Value: values[i], Suit: suits[x], Weight: weight };
+                const card = { Rank: ranks[i], Suit: suits[x], Weight: weight };
                 deck.push(card);
             }
         }
