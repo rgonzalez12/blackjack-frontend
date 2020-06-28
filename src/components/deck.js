@@ -12,12 +12,12 @@ class Deck {
 
             for(let x = 0; x < suits.length; x++) {
 
-                const weight = parseInt(ranks[i]);
+                let weight = parseInt(ranks[i]);
                 if (ranks[i] == "J" || ranks[i] == "Q" || ranks[i] == "K")
                     weight = 10;
                 if (ranks[i] == "A")
                     weight = 11;
-                const card = { Rank: ranks[i], Suit: suits[x], Weight: weight };
+                let card = { Rank: ranks[i], Suit: suits[x], Weight: weight };
                 deck.push(card);
             }
         }
