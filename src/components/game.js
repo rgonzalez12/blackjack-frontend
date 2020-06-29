@@ -6,8 +6,7 @@ class Game {
         this.blackjacks_hit = blackjacks_hit
     }
 
-    static dealHands()
-    {
+    dealHands() {
         const players = []
         const deck = []
         for(let i = 0; i < 2; i++)
