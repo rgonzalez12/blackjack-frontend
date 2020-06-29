@@ -24,6 +24,7 @@ class Deck {
     }
 
     shuffleDeck(deck) {
+        
         const i = 0, j = 0, temp = null
       
         for (i = deck.length - 1; i > 0; i -= 1) {

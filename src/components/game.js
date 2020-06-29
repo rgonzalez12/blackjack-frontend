@@ -19,8 +19,17 @@ class Game {
                 updateStats();
             }
         }
-
         deckChanges();
-    }    
+    }
+    
+    endGame() {
+        if (players[i].points > handValue && players[i].points < 22)
+    }
+
+    hitButton.addEventListner('click', function() {
+        playerHand.push(drawCard());
+        checkWinCondition();
+        runGameStatus();
+    })
 
 }
