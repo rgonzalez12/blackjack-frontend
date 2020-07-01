@@ -1,5 +1,5 @@
 class Game {
-    constructor(id, wins, losses, blackjacks_hit, user, dealer, debug) {
+    constructor(id, wins, losses, blackjacks_hit, user, dealer, player, player_id, debug) {
         this.id = id
         this.wins = wins
         this.losses = losses
@@ -7,6 +7,8 @@ class Game {
         this.user = user;
         this.dealer = dealer;
         this.deck = null;
+        this.player = player;
+        this.player_id = player_id;
 
         if (debug) {
             this.debug = debug;
