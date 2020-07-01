@@ -1,97 +1,116 @@
-////// ORCHESTRATION ///////
-
-const user = new Player('Ray');
-const dealer = new Player('Dealer');
-const blackjack = new Game(1, 0, 0, 0, user, dealer)
-
-////////////////////////////////////
-
-
-
 class Game {
-    constructor(id, wins, losses, blackjacks_hit, user, dealer) {
+    constructor(id, wins, losses, blackjacks_hit, user, dealer, debugOptions) {
         this.id = id
         this.wins = wins
         this.losses = losses
         this.blackjacks_hit = blackjacks_hit
         this.user = user;
         this.dealer = dealer;
+        this.deck = null;
+
+        this.debugOptions = debugOptions;
+        this.debugGameOver = false;
     }
 
     startGame() {
         let deck = new Deck();
-        deck = deck.buildDeck();
-        deck = deck.shuffleDeck();
-        this.dealHands(deck);
-        this.waitForUserInput(deck);
-    }
+        console.log('building deck');
+        deck.buildDeck();
+        console.log('shuffling deck');
+        deck.shuffleDeck();
+        this.deck = deck;
+        console.log('dealing hands to players');
+        this.dealHands();
 
-    waitForUserInput(deck) {
-        const userChoice = 'HIT';
-        if (userChoice === 'HIT') {
-            this.hitCard(deck, this.user);
-        } else {
-            this.stay(deck, this.user);
+        const isBlackjack = this.checkForBlackjack(this.user);
+        if (isBlackjack) {
+            return this.updateGameState(true, isBlackjack);
         }
 
-
+        this.debugOptions.forEach((debugOption) => {
+            if (!this.debugGameOver) {
+                this.waitForUserInput(debugOption);            
+            }
+        });
     }
 
-    dealHands(deck) {
+    waitForUserInput(userChoice) {
+        if (userChoice === 'HIT') {
+            console.log('User Hit');
+            this.hitCard(this.user);
+        } else {
+            console.log('User Stayed');
+            this.stay(this.user);
+        }
+    }
+
+    dealHands() {
         for (let i = 0; i < 2; i++) 
         {
-            this.dealCardToPlayer(deck, this.dealer);
-            this.dealCardToPlayer(deck, this.user);
+            this.dealCardToPlayer(this.dealer);
+            this.dealCardToPlayer(this.user);
         }
     }
 
-    dealCardToPlayer(deck, player) {
-        const card = deck.pop();
+    dealCardToPlayer(player) {
+        const card = this.deck.currentDeck.pop();
+        console.log('dealing card ', card.rank, 'to player ', player.name);
         player.currentHand.push(card);
     }
 
-    hitCard(deck, playerThatHit) {
-        this.dealCardToPlayer(deck, playerThatHit);
+    hitCard(playerThatHit) {
+        this.dealCardToPlayer(playerThatHit);
         if (this.checkForBust(playerThatHit)) {
             this.updateGameState(false, false);
-            // Restart Game
-        } else { 
-            const isBlackjack = this.checkForBlackjack(playerThatHit);
-            this.updateGameState(true, isBlackjack);
         }
     }
 
-    stay(deck, user) {
-        
-
+    stay(user) {
+        if (this.checkForBust(this.dealer)) {
+            return this.updateGameState(true, false);
+        } else if (this.checkForSeventeen(this.dealer)) {
+            const isWin = user.currentScore() > this.dealer.currentScore();
+            return this.updateGameState(isWin, false);
+        } else {
+            this.hitCard(this.dealer);
+            return this.stay(user);
+        }
     }
 
     updateGameState(isWin, isBlackjack) {
+        console.log('updating game state');
         if (isWin) {
+            console.log('player won:', this.user.currentScore());
             this.wins += 1;
 
             if (isBlackjack) {
+                console.log('player hit blackjack')
                 this.blackjacks_hit += 1;
             }
         } else {
+            console.log('player lost:', this.user.currentScore());
             this.losses += 1;
         }
 
+        this.debugGameOver = true;
+
+        return;
+
         // Ajax request update game state
+
+        this.startGame();
     }
 
     checkForBust(player) {
-        return this.player.currentScore() > 21;
+        return player.currentScore() > 21;
     }
 
     checkForBlackjack(player) {
-        return this.player.currentBlackjack();
+        return player.currentBlackjack();
     }
 
-    hitButton.addEventListner('click', function() {
-        playerHand.push(drawCard());
-        checkWinCondition();
-        runGameStatus();
-    })
+    checkForSeventeen(player) {
+        return player.currentScore() > 16;
+    }
 
 }

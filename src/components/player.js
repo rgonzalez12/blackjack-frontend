@@ -5,7 +5,7 @@ class Player {
     }
 
     playerCreation(numberOfPlayers) {
-        for (let i = 1: i <= numberOfPlayers; i++) {
+        for (let i = 1; i <= numberOfPlayers; i++) {
             const round = []
             const hand = []
             const player = {Name: '', ID: i, Hand: hand, Wins: wins, Losses: losses, Blackjacks_hit: blackjacks_hit};

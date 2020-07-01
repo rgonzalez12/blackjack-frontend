@@ -1,5 +1,9 @@
 class Deck {
 
+    constructor() {
+        this.currentDeck = []
+    }
+
 
     buildDeck() {
 
@@ -19,22 +23,25 @@ class Deck {
                     weight = 11;
                 }
 
-                let card = { Rank: ranks[i], Suit: suits[x], Weight: weight };
+                let card = { rank: ranks[i], suit: suits[x], weight: weight };
                 deck.push(card);
             }
         }
-        return deck
+
+        this.currentDeck = deck;
+
+        return deck;
     }
 
-    shuffleDeck(deck) {
+    shuffleDeck() {
         
-        const i = 0, j = 0, temp = null
+        let i = 0, j = 0, temp = null
       
-        for (i = deck.length - 1; i > 0; i -= 1) {
+        for (i = this.currentDeck.length - 1; i > 0; i -= 1) {
           j = Math.floor(Math.random() * (i + 1))
-          temp = deck[i]
-          deck[i] = deck[j]
-          deck[j] = temp
+          temp = this.currentDeck[i]
+          this.currentDeck[i] = this.currentDeck[j]
+          this.currentDeck[j] = temp
         }
     }
 
