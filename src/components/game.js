@@ -1,5 +1,5 @@
 class Game {
-    constructor(id, wins, losses, blackjacks_hit, user, dealer, debugOptions) {
+    constructor(id, wins, losses, blackjacks_hit, user, dealer, debug) {
         this.id = id
         this.wins = wins
         this.losses = losses
@@ -8,8 +8,10 @@ class Game {
         this.dealer = dealer;
         this.deck = null;
 
-        this.debugOptions = debugOptions;
-        this.debugGameOver = false;
+        if (debug) {
+            this.debug = debug;
+            this.debugGameOver = false;
+        }
     }
 
     startGame() {
@@ -27,11 +29,13 @@ class Game {
             return this.updateGameState(true, isBlackjack);
         }
 
-        this.debugOptions.forEach((debugOption) => {
-            if (!this.debugGameOver) {
-                this.waitForUserInput(debugOption);            
-            }
-        });
+        if (this.debug) {
+            this.debug.debugOptions.forEach((debugOption) => {
+                if (!this.debugGameOver) {
+                    this.waitForUserInput(debugOption);            
+                }
+            });
+        }
     }
 
     waitForUserInput(userChoice) {
@@ -92,10 +96,10 @@ class Game {
             this.losses += 1;
         }
 
-        this.debugGameOver = true;
-
-        return;
-
+        if (this.debug) {
+            this.debugGameOver = true;
+            return; 
+        }
         // Ajax request update game state
 
         this.startGame();
