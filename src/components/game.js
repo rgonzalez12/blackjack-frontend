@@ -31,7 +31,7 @@ class Game {
         if (userChoice === 'HIT') {
             this.hitCard(deck, this.user);
         } else {
-            // do STAY things
+            this.stay(deck, this.user);
         }
 
 
@@ -52,11 +52,40 @@ class Game {
 
     hitCard(deck, playerThatHit) {
         this.dealCardToPlayer(deck, playerThatHit);
-        checkForBust();
+        if (this.checkForBust(playerThatHit)) {
+            this.updateGameState(false, false);
+            // Restart Game
+        } else { 
+            const isBlackjack = this.checkForBlackjack(playerThatHit);
+            this.updateGameState(true, isBlackjack);
+        }
     }
-    
-    checkForBust() {
-        return this.user.points > 21;
+
+    stay(deck, user) {
+        
+
+    }
+
+    updateGameState(isWin, isBlackjack) {
+        if (isWin) {
+            this.wins += 1;
+
+            if (isBlackjack) {
+                this.blackjacks_hit += 1;
+            }
+        } else {
+            this.losses += 1;
+        }
+
+        // Ajax request update game state
+    }
+
+    checkForBust(player) {
+        return this.player.currentScore() > 21;
+    }
+
+    checkForBlackjack(player) {
+        return this.player.currentBlackjack();
     }
 
     hitButton.addEventListner('click', function() {

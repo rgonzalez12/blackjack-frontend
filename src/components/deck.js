@@ -12,10 +12,13 @@ class Deck {
             for(let x = 0; x < suits.length; x++) {
 
                 let weight = parseInt(ranks[i]);
-                if (ranks[i] == "J" || ranks[i] == "Q" || ranks[i] == "K")
+                if (ranks[i] == "J" || ranks[i] == "Q" || ranks[i] == "K") {
                     weight = 10;
-                if (ranks[i] == "A")
+                }
+                if (ranks[i] == "A") {
                     weight = 11;
+                }
+
                 let card = { Rank: ranks[i], Suit: suits[x], Weight: weight };
                 deck.push(card);
             }

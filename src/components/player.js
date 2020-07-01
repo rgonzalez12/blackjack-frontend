@@ -31,4 +31,10 @@ class Player {
         }, 0);
     }
 
+    currentBlackjack() {
+        if (this.currentHand.length === 2) {
+            return this.currentHand[0].weight + this.currentHand[1].weight === 21;
+        }
+    }
+
 }
