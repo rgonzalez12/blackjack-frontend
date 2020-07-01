@@ -6,18 +6,22 @@ class Game {
         this.blackjacks_hit = blackjacks_hit
     }
 
-    dealHands() {
+    oneGameLoop() {
+        let deck = new Deck();
+        deck = deck.buildDeck();
+        deck = deck.shuffleDeck();
+        this.dealHands(deck);
+
+    }
+
+    dealHands(deck) {
         const players = []
-        const deck = []
         for(let i = 0; i < 2; i++)
         {
-            for (let x = 0; x < players.length; x++)
-            {
-                let card = deck.pop();
-                players[x].Hand.push(card);
-                buildCard(card, x);
-                updateStats();
-            }
+            let card = deck.pop();
+            players[x].Hand.push(card);
+            buildCard(card, x);
+            updateStats();
         }
         deckChanges();
     }
