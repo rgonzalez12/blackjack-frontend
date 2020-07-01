@@ -1,6 +1,7 @@
 class Player {
-    constructor(name) {
-        this.name = name
+    constructor(name, currentHand = []) {
+        this.name = name;
+        this.currentHand = currentHand;
     }
 
     playerCreation(numberOfPlayers) {

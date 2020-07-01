@@ -1,29 +1,41 @@
+////// ORCHESTRATION ///////
+
+const user = new Player('Ray');
+const dealer = new Player('Dealer');
+const blackjack = new Game(1, 0, 0, 0, user, dealer)
+
+////////////////////////////////////
+
+
+
 class Game {
-    constructor(id, wins, losses, blackjacks_hit) {
+    constructor(id, wins, losses, blackjacks_hit, user, dealer) {
         this.id = id
         this.wins = wins
         this.losses = losses
         this.blackjacks_hit = blackjacks_hit
+        this.user = user;
+        this.dealer = dealer;
     }
 
-    oneGameLoop() {
+    startGame() {
         let deck = new Deck();
         deck = deck.buildDeck();
         deck = deck.shuffleDeck();
         this.dealHands(deck);
-
     }
 
     dealHands(deck) {
-        const players = []
-        for(let i = 0; i < 2; i++)
+        for (let i = 0; i < 2; i++) 
         {
-            let card = deck.pop();
-            players[x].Hand.push(card);
-            buildCard(card, x);
-            updateStats();
+            this.dealCardToPlayer(deck, this.dealer);
+            this.dealCardToPlayer(deck, this.user);
         }
-        deckChanges();
+    }
+
+    dealCardToPlayer(deck, player) {
+        const card = deck.pop();
+        player.currentHand.push(card);
     }
     
     endGame() {
