@@ -23,6 +23,18 @@ class Game {
         deck = deck.buildDeck();
         deck = deck.shuffleDeck();
         this.dealHands(deck);
+        this.waitForUserInput(deck);
+    }
+
+    waitForUserInput(deck) {
+        const userChoice = 'HIT';
+        if (userChoice === 'HIT') {
+            this.hitCard(deck, this.user);
+        } else {
+            // do STAY things
+        }
+
+
     }
 
     dealHands(deck) {
@@ -37,9 +49,14 @@ class Game {
         const card = deck.pop();
         player.currentHand.push(card);
     }
+
+    hitCard(deck, playerThatHit) {
+        this.dealCardToPlayer(deck, playerThatHit);
+        checkForBust();
+    }
     
-    endGame() {
-        if (players[i].points > handValue && players[i].points < 22)
+    checkForBust() {
+        return this.user.points > 21;
     }
 
     hitButton.addEventListner('click', function() {

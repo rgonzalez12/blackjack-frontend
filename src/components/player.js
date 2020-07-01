@@ -25,4 +25,10 @@ class Player {
         }
     }
 
+    currentScore() {
+        return this.currentHand.reduce((acc, card) => {
+            return acc + card.weight;
+        }, 0);
+    }
+
 }
