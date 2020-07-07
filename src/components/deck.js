@@ -22,12 +22,10 @@ class Deck {
                 if (ranks[i] == "A") {
                     weight = 11;
                 }
-
                 let card = { rank: ranks[i], suit: suits[x], weight: weight };
                 deck.push(card);
             }
         }
-
         this.currentDeck = deck;
 
         return deck;
