@@ -18,12 +18,9 @@ class Game {
 
     startGame() {
         let deck = new Deck();
-        console.log('building deck');
         deck.buildDeck();
-        console.log('shuffling deck');
         deck.shuffleDeck();
         this.deck = deck;
-        console.log('dealing hands to players');
         this.dealHands();
 
         const isBlackjack = this.checkForBlackjack(this.user);

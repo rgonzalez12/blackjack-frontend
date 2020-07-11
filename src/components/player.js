@@ -13,18 +13,6 @@ class Player {
         }
     }
 
-    renderPlayerInterface() {
-        let players = []
-        document.getElementById('players').innerHTML = '';
-        for (let i = 0; i < players.length; i++) {
-            const player_div = document.createElement('div');
-            const hand_div = document.createElement('div');
-            const wins_div = document.createElement('div');
-            const losses_div = document.createElement('div');
-            const bjh_div = document.createElement('div');
-        }
-    }
-
     currentScore() {
         return this.currentHand.reduce((acc, card) => {
             return acc + card.weight;
