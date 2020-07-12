@@ -14,10 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         renderPlayerHand(playerHand)
         renderPlayerScore(game.user.currentScore())
+        renderHitButton(game.user.hitCard(playerThatHit))
+        renderStayButton(game.user.stay(user))
     
-        gameStarted = true;
-        gameOver = false;
-        playerWon = false;
       })
 })
 
@@ -41,5 +40,23 @@ const renderPlayerScore = (currentScore) => {
     let playerScore = document.createTextNode(`Current Hand: ${currentScore}`)
 
     node.appendChild(playerScore)
+    gameSection.appendChild(node)
+}
+
+const renderHitButton = (hitCard) => {
+    let gameSection = document.getElementById('game-section')
+    let node = document.createElement("BUTTON")
+    let playerHit = document.createTextNode(`Hit`)
+
+    node.appendChild(playerHit)
+    gameSection.appendChild(node)
+}
+
+const renderStayButton = (stay) => {
+    let gameSection = document.getElementById('game-section')
+    let node = document.createElement("BUTTON")
+    let playerStay = document.createElement(`Stay`)
+
+    node.appendChild(playerStay)
     gameSection.appendChild(node)
 }
