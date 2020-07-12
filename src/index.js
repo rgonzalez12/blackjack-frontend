@@ -15,8 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const playerStay = game.stay
         const dealerHand = game.dealer.currentHand
 
-        renderPlayerHand(playerHand)
         renderDealerHand(dealerHand)
+        renderPlayerHand(playerHand)
+        
         renderPlayerScore(game.user.currentScore())
         renderHitButton(playerHit)
         renderStayButton(playerStay)
@@ -60,7 +61,7 @@ const renderDealerHand = (dealerHand) => {
 const renderPlayerScore = (currentScore) => {
     let gameSection = document.getElementById('game-section')
     let node = document.createElement("UL")
-    let playerScore = document.createTextNode(`Current Hand: ${currentScore}`)
+    let playerScore = document.createTextNode(`Current Score: ${currentScore}`)
 
     node.appendChild(playerScore)
     gameSection.appendChild(node)
