@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
         renderPlayerScore(game.user.currentScore())
         renderHitButton(playerHit)
         renderStayButton(playerStay)
+
+        document.getElementById('hit-button').addEventListener('click', Game.game.hitCard(player))
+        document.getElementById('stay-button').addEventListener('click', Game.game.stay(player))
       })
 })
 
@@ -71,6 +74,7 @@ const renderHitButton = (hitCard) => {
     let gameSection = document.getElementById('game-section')
     let node = document.createElement("BUTTON")
     let playerHit = document.createTextNode(`Hit`)
+    node.id = "hit-button"
 
     node.appendChild(playerHit)
     gameSection.appendChild(node)
@@ -80,6 +84,7 @@ const renderStayButton = (stay) => {
     let gameSection = document.getElementById('game-section')
     let node = document.createElement("BUTTON")
     let playerStay = document.createTextNode(`Stay`)
+    node.id = "stay-button"
 
     node.appendChild(playerStay)
     gameSection.appendChild(node)
